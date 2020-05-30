@@ -41,7 +41,8 @@ class ProjectsController extends Controller
             'title' => 'required',
             'description' => 'required'
         ]);
-        Project::create($validatedData);
+
+        auth()->user()->projects()->create($validatedData);
 
         return redirect('/projects');
     }
