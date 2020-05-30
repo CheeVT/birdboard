@@ -18,6 +18,9 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </head>
 <body>
     <div id="app">
@@ -72,7 +75,7 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main class="container py-4">
             @yield('content')
         </main>
     </div>
