@@ -13,3 +13,8 @@
 @import "~tailwindcss/dist/components";
 
 @import "~tailwindcss/dist/utilities";
+
+.button {
+  @apply .bg-blue-300 .text-white .no-underline .rounded-lg .text-sm .py-2 .px-5;
+  box-shadow: 0 2px 7px 0 #b8eaff;
+}
