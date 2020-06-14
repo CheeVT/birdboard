@@ -39,7 +39,8 @@ class ProjectsController extends Controller
     {
         $validatedData = $request->validate([
             'title' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'notes' => 'min:3'
         ]);
 
         $project = auth()->user()->projects()->create($validatedData);
@@ -78,9 +79,13 @@ class ProjectsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Project $project)
     {
-        //
+        $this->authorize('update', $project);
+
+        $project->update($request->all());
+
+        return redirect($project->path());
     }
 
     /**

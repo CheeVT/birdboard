@@ -40,7 +40,12 @@
       </div>
       <div class="mb-6">
         <h2 class="text-gray-500 text-lg font-normal mb-3">General notes</h2>
-        <textarea name="" id="" cols="30" rows="10" class="card w-full">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus cum facere nesciunt hic. Excepturi perferendis maxime non culpa aut magni!</textarea>
+        <form method="POST" action="{{ $project->path() }}">
+          @csrf
+          @method('PATCH')
+          <textarea name="notes" rows="10" class="card w-full mb-4" placeholder="Anything special that you want to make a note of?">{{ $project->notes }}</textarea>
+          <button type="submit" class="button">Save</button>
+        </form>
       </div>
     </div>
 
