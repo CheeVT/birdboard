@@ -37,13 +37,7 @@ class ProjectsController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'notes' => 'min:3'
-        ]);
-
-        $project = auth()->user()->projects()->create($validatedData);
+        $project = auth()->user()->projects()->create($this->validateRequest());
 
         return redirect($project->path());
     }
@@ -67,9 +61,9 @@ class ProjectsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Project $project)
     {
-        //
+        return view('projects.edit', compact('project'));
     }
 
     /**
@@ -83,7 +77,7 @@ class ProjectsController extends Controller
     {
         $this->authorize('update', $project);
 
-        $project->update($request->all());
+        $project->update($this->validateRequest());
 
         return redirect($project->path());
     }
@@ -97,5 +91,13 @@ class ProjectsController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    protected function validateRequest() {
+        return request()->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'notes' => 'min:3'
+        ]);
     }
 }

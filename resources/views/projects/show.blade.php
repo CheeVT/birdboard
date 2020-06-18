@@ -2,10 +2,13 @@
 
 @section('content')
 <header class="flex items-center mb-3 py-4">
-  <div class="flex justify-between items-end w-full">
+  <div class="w-full">
     <p class="text-gray-500 text-sm font-normal">
       <a href="/projects">My projects</a> / {{ $project->title }}
     </p>
+  </div> 
+  <div class="text-right w-full">
+    <a href="{{ $project->path() }}/edit" class="button">Edit project</a>
   </div>  
 </header>
 
