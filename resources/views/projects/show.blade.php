@@ -49,6 +49,8 @@
           <textarea name="notes" rows="10" class="card w-full mb-4" placeholder="Anything special that you want to make a note of?">{{ $project->notes }}</textarea>
           <button type="submit" class="button">Save</button>
         </form>
+
+        @include('errors')
       </div>
     </div>
 
