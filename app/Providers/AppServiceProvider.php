@@ -6,6 +6,7 @@ use App\Task;
 use App\Project;
 use App\Observers\TaskObserver;
 use App\Observers\ProjectObserver;
+use Illuminate\Database\Schema\Builder; 
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -27,6 +28,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Builder::defaultStringLength(191); // Update defaultStringLength
         Project::observe(ProjectObserver::class);
         Task::observe(TaskObserver::class);
     }
