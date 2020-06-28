@@ -84,13 +84,11 @@ class ProjectTasksController extends Controller
             'body' => 'required'
         ]);
 
-        $task->update([
-            'body' => $request->body
-        ]);
+        $task->update($validatedData);
 
-        if($request->has('completed')) {
-            $task->complete();
-        }
+        $method = $request->completed ? 'complete' : 'incomplete';
+
+        $task->$method();
 
         return redirect($project->path());
     }
