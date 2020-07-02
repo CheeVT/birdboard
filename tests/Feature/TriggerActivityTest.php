@@ -18,7 +18,7 @@ class TriggerActivityTest extends TestCase
         $this->assertCount(1, $project->activity);
 
         tap($project->activity->last(), function($activity) {
-            $this->assertEquals('created', $activity->description);
+            $this->assertEquals('created_project', $activity->description);
             $this->assertNull($activity->changes);
         });
     }
@@ -33,11 +33,12 @@ class TriggerActivityTest extends TestCase
         $this->assertCount(2, $project->activity);
 
         tap($project->activity->last(), function($activity) use($originalTitle) {
-            $this->assertEquals('updated', $activity->description);
+            $this->assertEquals('updated_project', $activity->description);
             $expected = [
                 'before' => ['title' => $originalTitle],
                 'after' => ['title' => 'Changed']
             ];
+
             $this->assertEquals($expected, $activity->changes);
         });
     }
@@ -66,8 +67,8 @@ class TriggerActivityTest extends TestCase
                 'body' => 'changed',
                 'completed' => true
             ]);
-
-        $this->assertCount(3, $project->activity);
+                //dd($project->activity->toArray());
+        $this->assertCount(5, $project->activity);
 
         tap($project->activity->last(), function($activity) {
             $this->assertEquals('completed_task', $activity->description);
@@ -86,7 +87,7 @@ class TriggerActivityTest extends TestCase
                 'completed' => true
             ]);
 
-            $this->assertCount(3, $project->activity);
+            $this->assertCount(5, $project->activity);
 
             $this->patch($project->tasks->first()->path(), [
                 'body' => 'foobar',
@@ -95,7 +96,7 @@ class TriggerActivityTest extends TestCase
 
             $project->refresh();
 
-            $this->assertCount(4, $project->activity);
+            $this->assertCount(7, $project->activity);
             $this->assertEquals('incompleted_task', $project->activity->last()->description);
     }
 
