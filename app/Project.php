@@ -24,6 +24,14 @@ class Project extends Model
 
     public function addTask($body) {
         return $this->tasks()->create(compact('body'));
-    }    
+    }
+
+    public function invite(User $user) {
+        $this->members()->attach($user);
+    }
+
+    public function members() {
+        return $this->belongsToMany(User::class, 'project_members');
+    }
 
 }

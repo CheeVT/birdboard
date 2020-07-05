@@ -50,7 +50,7 @@ class ProjectsController extends Controller
      */
     public function show(Project $project)
     {
-        abort_if(auth()->user()->isNot($project->owner), 403);
+        $this->authorize('update', $project);
 
         return view('projects.show', compact('project'));
     }
