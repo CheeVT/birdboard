@@ -64,6 +64,10 @@
     <div class="lg:w-1/4 px-3">
       @include('projects._card')
       @include('projects.activity._card')
+
+      @can('manage', $project)
+        @include('projects._invitations')
+      @endcan
   </div>
   
   
