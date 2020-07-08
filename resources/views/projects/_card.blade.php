@@ -7,6 +7,7 @@
     {{ Str::limit($project->description, 100) }}
   </div>
 
+  @can('delete', $project)
   <footer>
     <form action="{{ $project->path() }}" method="POST" class="text-right">
       @method('DELETE')
@@ -14,4 +15,5 @@
       <button type="submit" class="text-xs">Delete</button>
     </form>
   </footer>
+  @endcan
 </div>
